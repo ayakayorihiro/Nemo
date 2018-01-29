@@ -1,0 +1,103 @@
+
+Welcome to IBM(R) ILOG(R) CPLEX(R) Interactive Optimizer 12.8.0.0
+  with Simplex, Mixed Integer & Barrier Optimizers
+5725-A06 5725-A29 5724-Y48 5724-Y49 5724-Y54 5724-Y55 5655-Y21
+Copyright IBM Corp. 1988, 2017.  All Rights Reserved.
+
+Type 'help' for a list of available commands.
+Type 'help' followed by a command name for more
+information on commands.
+
+CPLEX> Problem 'subject_programs/flex_v5/linear.cplex.lp' read.
+Read time = 0.01 sec. (0.88 ticks)
+CPLEX> Found incumbent of value 505.189289 after 0.00 sec. (0.21 ticks)
+Tried aggregator 2 times.
+MIP Presolve eliminated 267 rows and 585 columns.
+Aggregator did 2 substitutions.
+Reduced MIP has 9 rows, 17 columns, and 41 nonzeros.
+Reduced MIP has 17 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (7.70 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 9 rows, 17 columns, and 41 nonzeros.
+Reduced MIP has 17 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.02 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+Clique table members: 1.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 4 threads.
+Root relaxation solution time = 0.00 sec. (0.02 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           47.6487       34.1081            28.42%
+*     0+    0                           37.9460       34.1081            10.11%
+      0     0        cutoff             37.9460       37.9460       11    0.00%
+      0     0        cutoff             37.9460       37.9460       11    0.00%
+Elapsed time = 0.02 sec. (8.08 ticks, tree = 0.01 MB, solutions = 2)
+
+Root node processing (before b&c):
+  Real time             =    0.02 sec. (8.11 ticks)
+Parallel b&c, 4 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.02 sec. (8.11 ticks)
+
+Solution pool: 3 solutions saved.
+
+MIP - Integer optimal solution:  Objective =  3.7945952000e+01
+Solution time =    0.02 sec.  Iterations = 11  Nodes = 0
+Deterministic time = 8.11 ticks  (446.09 ticks/sec)
+
+CPLEX> Incumbent solution
+Variable Name           Solution Value
+t170                          1.000000
+t9                            1.000000
+t505                          1.000000
+t507                          1.000000
+t506                          1.000000
+t526                          1.000000
+t553                          1.000000
+t623                          1.000000
+t628                          1.000000
+t629                          1.000000
+t542                          1.000000
+t534                          1.000000
+t533                          1.000000
+t169                          1.000000
+t508                          1.000000
+t635                          1.000000
+t638                          1.000000
+t655                          1.000000
+t552                          1.000000
+t525                          1.000000
+t520                          1.000000
+t642                          1.000000
+t643                          1.000000
+t646                          1.000000
+t205                          1.000000
+t294                          1.000000
+t244                          1.000000
+t243                          1.000000
+t518                          1.000000
+t512                          1.000000
+t511                          1.000000
+t514                          1.000000
+t515                          1.000000
+t14                           1.000000
+t17                           1.000000
+t10                           1.000000
+t12                           1.000000
+t13                           1.000000
+t146                          1.000000
+t142                          1.000000
+t504                          1.000000
+t654                          1.000000
+t651                          1.000000
+t652                          1.000000
+All other variables in the range 1-605 are 0.
+CPLEX> 

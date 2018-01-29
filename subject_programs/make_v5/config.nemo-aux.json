@@ -1,0 +1,21 @@
+{
+  "name": "nemo-aux",
+  "output_format": "cplex_lp", 
+  "nonlinear": true,
+  "relax": true,
+  "min_or_max": "min",
+  "absolute_cria": [{
+    "is_coefficient": false, 
+    "crio_type": "<=",
+    "rhs": 35,
+    "file": "cov.info"
+  }], 
+  "relative_cria": [
+    {
+      "is_dependent": true, 
+      "weight": 1, 
+      "file": "fault.info",
+      "invert": true
+    }
+  ]
+}

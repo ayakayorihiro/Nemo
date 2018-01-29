@@ -1,0 +1,76 @@
+NEOS Server Home
+
+*************************************************************
+
+   NEOS Server Version 5.0
+   Job#     : 5531681
+   Password : NYZmTegD
+   User     : None
+   Solver   : go:Couenne:AMPL
+   Start    : 2017-08-16 16:43:14
+   End      : 2017-08-16 16:43:19
+   Host     : NEOS HTCondor Pool
+
+   Disclaimer:
+
+   This information is provided without any express or
+   implied warranty. In particular, there is no warranty
+   of any kind concerning the fitness of this
+   information  for any particular purpose.
+*************************************************************
+File exists
+You are using the solver couenne.
+Executing AMPL.
+processing data.
+processing commands.
+Executing on prod-exec-3.neos-server.org
+
+Presolve eliminates 2 constraints and 1 variable.
+Adjusted problem:
+2 variables, all binary
+1 constraint, all linear; 2 nonzeros
+	1 inequality constraint
+1 linear objective; 2 nonzeros.
+
+Couenne 0.5.6 -- an Open-Source solver for Mixed Integer Nonlinear Optimization
+Mailing list: couenne@list.coin-or.org
+Instructions: http://www.coin-or.org/Couenne
+couenne: 
+ANALYSIS TEST: NLP0012I 
+              Num      Status      Obj             It       time                 Location
+NLP0014I             1         OPT 0.99999999       10 0.003999
+Couenne: new cutoff value 1.0000000000e+00 (0.006998 seconds)
+Loaded instance "/var/lib/condor/execute/dir_3465783/neos-3465789/at3465791.nl"
+Constraints:            1
+Variables:              2 (2 integer)
+Auxiliaries:            1 (0 integer)
+
+Coin0506I Presolve 0 (-2) rows, 0 (-3) columns and 0 (-3) elements
+Clp0000I Optimal - objective value 1
+Clp0032I Optimal objective 1 - 0 iterations time 0.002, Presolve 0.00
+Clp0000I Optimal - objective value 1
+Cbc0012I Integer solution of 1 found by Couenne Rounding NLP after 0 iterations and 0 nodes (0.00 seconds)
+NLP Heuristic: NLP0014I             2         OPT 1        0 0
+no solution.
+Cbc0001I Search completed - best objective 1, took 0 iterations and 0 nodes (0.00 seconds)
+Cbc0035I Maximum depth 0, 0 variables fixed on reduced cost
+Clp0000I Optimal - objective value 1
+
+ 	"Finished"
+
+Linearization cuts added at root node:          2
+Linearization cuts added in total:              2  (separation time: 0s)
+Total solve time:                           0.001s (0.001s in branch-and-bound)
+Lower bound:                                    1
+Upper bound:                                    1  (gap: 0.00%)
+Branch-and-bound nodes:                         0
+
+couenne: Optimal
+: _varname _var    :=
+1   t2       1
+2   t3       0
+3   t1       1
+;
+
+
+ NEOS Server
