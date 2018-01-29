@@ -1,6 +1,7 @@
 # Nemo: Multi-Criteria Test-Suite Minimization with Integer Nonlinear Programming
 
 Jun-Wei Lin, Reyhaneh Jabbarvand, Joshua Garcia, and Sam Malek
+
 International Conference of Software Engineering (ICSE 2018), Gothenburg, Sweden, May 2018. (21% acceptance rate).
 
 ## Prerequisite
