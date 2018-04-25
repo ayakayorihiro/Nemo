@@ -337,13 +337,15 @@ class Formulator:
                     if coeff != 0:
                         #coeff_str = str(coeff)
                         coeff_str = '%0.6f' % coeff
+                        if coeff_str[0] != '-':
+                            coeff_str = '+' + coeff_str
                         obj_func.append(coeff_str + ' ' + tc)
                 num_group = int(math.floor(len(obj_func)/500)) + 1
                 for i in range(0, num_group):
-                    obj_str = ' + '.join(obj_func[i*500:(i+1)*500]).replace('+ -', '-') + '\n'
+                    obj_str = ' '.join(obj_func[i*500:(i+1)*500]).replace('+ -', '-') + '\n'
                     f.write(obj_str)
-                    if i < num_group-1 and (i+1)*500 < len(obj_func) and not obj_str.startswith('-'):
-                        f.write(' + ')
+                    #if i < num_group-1 and (i+1)*500 < len(obj_func) and not obj_str.startswith('-'):
+                    #    f.write(' + ')
                 f.write('\n')
                 # constraints
                 vij_set = set()
