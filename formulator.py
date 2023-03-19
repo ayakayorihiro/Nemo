@@ -363,7 +363,7 @@ class Formulator:
                 num_group = int(math.floor(len(all_tc)/500)) + 1
                 f.write('binary\n\n')
                 for i in range(0, num_group):
-                    f.write(' '.join(all_tc[i*500:(i+1)*500]) + '\n')
+                    f.write(' '.join(all_tc[i*500:(i+1)*500] + list(vij_set)) + '\n')
                 f.write('\nend')
         elif self.config['output_format'] == 'ampl':
              # tc_to_coeff is a dict here
