@@ -1,0 +1,27 @@
+{
+  "name": "nemo-aux.wTime",
+  "output_format": "cplex_lp", 
+  "nonlinear": true,
+  "relax": true,
+  "min_or_max": "min",
+  "absolute_cria": [{
+    "is_coefficient": false, 
+    "crio_type": "<=",
+    "rhs": 35,
+    "file": "cov.info"
+  }],
+  "relative_cria": [
+    {
+      "is_dependent": true, 
+      "weight": 1, 
+      "file": "fault.info",
+      "invert": true
+    },
+    {
+      "is_dependent": false, 
+      "weight": 1,
+      "file": "rtime.info",
+      "invert": false
+    }
+  ]
+}
