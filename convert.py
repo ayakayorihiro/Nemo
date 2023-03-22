@@ -16,6 +16,7 @@ def build_test_to_ident_map(all_tests_file, out_dir):
             acc += 1
 
     with open(os.path.join(out_dir, "tests-ident-map.csv"), "w") as f:
+        f.write("test,id\n")
         for tst in test_to_ident:
             f.write(test_to_ident[tst] + "," + tst + "\n")
 
@@ -27,7 +28,11 @@ def convert_requirements_file(original_file, out_dir, test_to_ident):
         for line in f:
             line_split = line.strip().split(",")
             tst = line_split[0]
-            test_to_requirements[tst] = line_split[1:]
+            test_to_requirements[tst] = []
+            for req in line_split[1:]:
+                if req == "":
+                    continue
+                test_to_requirements[tst].append(str(int(req.split("tr")[1])))
 
     with open(os.path.join(out_dir, "cov.info"), "w") as f:
         for tst in test_to_requirements:
@@ -42,12 +47,12 @@ def convert_violations_file(original_file, out_dir, test_to_ident):
         for line in f:
             line_split = line.strip().split(",")
             tst = line_split[0]
-            test_to_violations[tst] = ["v0"] # give a default violation to prevent no formula being given when there are no violations
+            test_to_violations[tst] = ["0"] # give a default violation to prevent no formula being given when there are no violations
             for violation in line_split[1:]:
                 if violation == "":
                     continue
                 if not violation in violation_to_ident_map:
-                    violation_to_ident_map[violation] = "v" + str(acc)
+                    violation_to_ident_map[violation] = str(acc)
                     acc += 1
                 violation_id = violation_to_ident_map[violation]
                 test_to_violations[tst].append(violation_id)
@@ -57,7 +62,7 @@ def convert_violations_file(original_file, out_dir, test_to_ident):
             f.write(test_to_ident[tst] + ":" + " ".join(test_to_violations[tst]) + "\n")
 
     with open(os.path.join(out_dir, "violations-to-ident.csv"), "w") as f:
-        f.write("violation,id")
+        f.write("violation,id\n")
         for violation in violation_to_ident_map:
             f.write(violation + "," + violation_to_ident_map[violation] + "\n")
 
