@@ -11,6 +11,7 @@ fault_fname = 'fault.info'
 rtime_fname = 'rtime.info'
 proj_path = sys.argv[1]
 sol_fname = sys.argv[2]  # linear.sol.cplex | nonlinear.sol.couenne | minisat | obpdp
+out_file = sys.argv[3]
 assert proj_path
 assert sol_fname
 
@@ -196,12 +197,17 @@ def get_coverage(fname, crio_type, is_multiple, selected_tcs):
     else:
         print '# %s by minimized suite: %d' % (crio_type, sum([tc_to_crio[tc] for tc in selected_tcs]))
 
+def output_selected_tcs(selected_tcs):
+    with open(out_file, "w") as f:
+        for tst in selected_tcs:
+            f.write(tst + "\n")
 
 if __name__ == '__main__':
     selected_tcs = get_selected_tcs(sol_fname)
+    output_selected_tcs(selected_tcs)
     print 'Minimized test suite:', selected_tcs
     print '# Minimized test suite:', len(selected_tcs)
     get_coverage(cov_fname, 'Statements', True, selected_tcs)
     get_coverage(fault_fname, 'Faults', True, selected_tcs)
-    get_coverage(rtime_fname, 'Running time', False, selected_tcs)
+    # get_coverage(rtime_fname, 'Running time', False, selected_tcs)
 
