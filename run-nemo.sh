@@ -38,6 +38,8 @@ fi
 if [ ! -d ${MATRIX_DIR} ]; then
     echo "[$0] Matrix directory ${MATRIX_DIR} does not exist! Exiting..."
     exit
+else
+    echo "[$0] Using matrix directory ${MATRIX_DIR}..."
 fi
 
 function backup_old_results() {
