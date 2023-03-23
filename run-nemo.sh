@@ -21,15 +21,15 @@ if [ "${MODE_ARG}" == "wTime" ]; then
     CPLEX_FILE_NAME=nemo-aux.wTime.cplex.lp
     SOLUTION_FILE_NAME=nemo-aux.wTime.sol.cplex
     out_file=${OUT_DIR}/multicriteriaWTime@${MATRIX}-minimized-test-suite.txt
+    THIS_WORKDIR=${WORKDIR}/${PROJECT_NAME}@matrix-${MATRIX}-${MODE}
 else
     echo "[$0] Running with criteria traces + violations"
     CONFIG_FILE_NAME=config.nemo-aux.json
     CPLEX_FILE_NAME=nemo-aux.cplex.lp
     SOLUTION_FILE_NAME=nemo-aux.sol.cplex
     out_file=${OUT_DIR}/multicriteria@${MATRIX}-minimized-test-suite.txt
+    THIS_WORKDIR=${WORKDIR}/${PROJECT_NAME}@matrix-${MATRIX}
 fi
-
-THIS_WORKDIR=${WORKDIR}/${PROJECT_NAME}@matrix-${MATRIX}
 
 if [ "${MATRIX_DIR}" == "DEFAULT" ]; then
     MATRIX_DIR=${MINIMIZATION_SCRIPTS_DIR}/mappings/${PROJECT_NAME}/matrix-${MATRIX}
