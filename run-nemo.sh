@@ -1,7 +1,7 @@
 if [ $# -lt 6 ]; then
-    echo "USAGE: bash $0 PROJECT_NAME MATRIX_NAME MATRICES_DIR MINIMIZATION_SCRIPTS_DIR WORKDIR OUT_DIR [CRITERIA_OPTION]"
+    echo "USAGE: bash $0 PROJECT_NAME MATRIX_NAME MATRIX_DIR MINIMIZATION_SCRIPTS_DIR WORKDIR OUT_DIR [CRITERIA_OPTION]"
     echo "if CRITERIA_OPTION is wTime, time will be included as a relative criterion."
-    echo "if MATRICES_DIR is DEFAULT, then ${MINIMIZATION_SCRIPTS_DIR}/mappings will be used."
+    echo "if MATRIX_DIR is DEFAULT, then MINIMIZATION_SCRIPTS_DIR/mappings/PROJECT_NAME/matrix-MATRIX_NAME will be used."
     exit
 fi
 
@@ -9,7 +9,7 @@ SCRIPT_DIR=$( cd $( dirname $0 ) && pwd )
 
 PROJECT_NAME=$1
 MATRIX=$2
-MATRICES_DIR=$3
+MATRIX_DIR=$3
 MINIMIZATION_SCRIPTS_DIR=$4
 WORKDIR=$5
 OUT_DIR=$6
@@ -31,11 +31,9 @@ fi
 
 THIS_WORKDIR=${WORKDIR}/${PROJECT_NAME}@matrix-${MATRIX}
 
-if [ "${MATRICES_DIR}" == "DEFAULT" ]; then
-    MATRICES_DIR=${MINIMIZATION_SCRIPTS_DIR}/mappings
+if [ "${MATRIX_DIR}" == "DEFAULT" ]; then
+    MATRIX_DIR=${MINIMIZATION_SCRIPTS_DIR}/mappings/${PROJECT_NAME}/matrix-${MATRIX}
 fi
-
-MATRIX_DIR=${MATRICES_DIR}/${PROJECT_NAME}/matrix-${MATRIX}
 
 if [ ! -d ${MATRIX_DIR} ]; then
     echo "[$0] Matrix directory ${MATRIX_DIR} does not exist! Exiting..."
