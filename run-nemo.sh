@@ -1,6 +1,7 @@
-if [ $# -lt 5 ]; then
-    echo "USAGE: bash $0 PROJECT_NAME MATRIX_NAME MINIMIZATION_SCRIPTS_DIR WORKDIR OUT_DIR [CRITERIA_OPTION]"
+if [ $# -lt 6 ]; then
+    echo "USAGE: bash $0 PROJECT_NAME MATRIX_NAME MATRICES_DIR MINIMIZATION_SCRIPTS_DIR WORKDIR OUT_DIR [CRITERIA_OPTION]"
     echo "if CRITERIA_OPTION is wTime, time will be included as a relative criterion."
+    echo "if MATRICES_DIR is DEFAULT, then ${MINIMIZATION_SCRIPTS_DIR}/mappings will be used."
     exit
 fi
 
@@ -8,11 +9,12 @@ SCRIPT_DIR=$( cd $( dirname $0 ) && pwd )
 
 PROJECT_NAME=$1
 MATRIX=$2
-MINIMIZATION_SCRIPTS_DIR=$3
-WORKDIR=$4
-OUT_DIR=$5
+MATRICES_DIR=$3
+MINIMIZATION_SCRIPTS_DIR=$4
+WORKDIR=$5
+OUT_DIR=$6
 mkdir -p ${OUT_DIR}
-MODE_ARG=$6
+MODE_ARG=$7
 if [ "${MODE_ARG}" == "wTime" ]; then
     echo "[$0] Running with criteria traces + violations + time"
     CONFIG_FILE_NAME=config.wTime.nemo-aux.json
@@ -29,7 +31,11 @@ fi
 
 THIS_WORKDIR=${WORKDIR}/${PROJECT_NAME}@matrix-${MATRIX}
 
-MATRIX_DIR=${MINIMIZATION_SCRIPTS_DIR}/mappings/${PROJECT_NAME}/matrix-${MATRIX}
+if [ "${MATRICES_DIR}" == "DEFAULT" ]; then
+    MATRICES_DIR=${MINIMIZATION_SCRIPTS_DIR}/mappings
+fi
+
+MATRIX_DIR=${MATRICES_DIR}/${PROJECT_NAME}/matrix-${MATRIX}
 
 if [ ! -d ${MATRIX_DIR} ]; then
     echo "[$0] Matrix directory ${MATRIX_DIR} does not exist! Exiting..."
