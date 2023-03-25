@@ -36,7 +36,8 @@ def convert_requirements_file(original_file, out_dir, test_to_ident):
 
     with open(os.path.join(out_dir, "cov.info"), "w") as f:
         for tst in test_to_requirements:
-            f.write(test_to_ident[tst] + ":" + " ".join(test_to_requirements[tst]) + "\n")
+            if tst in test_to_ident:
+                f.write(test_to_ident[tst] + ":" + " ".join(test_to_requirements[tst]) + "\n")
 
 def convert_violations_file(original_file, out_dir, test_to_ident):
     violation_to_ident_map = {}
@@ -59,7 +60,8 @@ def convert_violations_file(original_file, out_dir, test_to_ident):
 
     with open(os.path.join(out_dir, "fault.info"), "w") as f:
         for tst in test_to_violations:
-            f.write(test_to_ident[tst] + ":" + " ".join(test_to_violations[tst]) + "\n")
+            if tst in test_to_ident:
+                f.write(test_to_ident[tst] + ":" + " ".join(test_to_violations[tst]) + "\n")
 
     with open(os.path.join(out_dir, "violations-to-ident.csv"), "w") as f:
         f.write("violation,id\n")
