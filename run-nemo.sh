@@ -89,6 +89,7 @@ function main() {
 
     output_start_message "CONVERTING" ${run_info}
     python3 ${SCRIPT_DIR}/convert.py ${MATRIX_DIR}/all-tests.txt ${MATRIX_DIR}/mapping.csv ${MINIMIZATION_SCRIPTS_DIR}/violations-map/${PROJECT_NAME}-violations.csv ${MINIMIZATION_SCRIPTS_DIR}/test-time-files/${PROJECT_NAME}-times.csv ${THIS_WORKDIR}
+    res="$?"
     if [ "${res}" -eq 0 ]; then
         echo "$0: Conversion succeeded!"
     else
