@@ -68,7 +68,7 @@ def convert_dimension_file(original_file, out_dir, test_to_ident, mode):
                 test_to_content[tst].append(content_id)
 
     with open(os.path.join(out_dir, out_file), "w") as f:
-        for tst in test_to_violations:
+        for tst in test_to_content:
             if tst in test_to_ident:
                 f.write(test_to_ident[tst] + ":" + " ".join(test_to_content[tst]) + "\n")
 
