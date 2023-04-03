@@ -39,34 +39,43 @@ def convert_requirements_file(original_file, out_dir, test_to_ident):
             if tst in test_to_ident:
                 f.write(test_to_ident[tst] + ":" + " ".join(test_to_requirements[tst]) + "\n")
 
-def convert_violations_file(original_file, out_dir, test_to_ident):
-    violation_to_ident_map = {}
-    test_to_violations = {}
+def convert_dimension_file(original_file, out_dir, test_to_ident, mode):
+    assert(mode == "violation" or mode == "req")
+    if mode == "violation":
+        out_file = "fault.info"
+        mapping_file = "violations-to-ident.csv"
+    elif mode == "req":
+        out_file = "cov.info"
+        mapping_file = "requirements-to-ident.csv"
+
+    content_to_ident_map = {}
+    test_to_content = {}
     acc = 1
     with open(original_file, "r") as f:
-        next(f)
+        if (mode == "violation"):
+            next(f)
         for line in f:
             line_split = line.strip().split(",")
             tst = line_split[0]
-            test_to_violations[tst] = ["0"] # give a default violation to prevent no formula being given when there are no violations
-            for violation in line_split[1:]:
-                if violation == "":
+            test_to_content[tst] = ["0"] # give a default to prevent no formula being given when there are none
+            for content in line_split[1:]:
+                if content == "":
                     continue
-                if not violation in violation_to_ident_map:
-                    violation_to_ident_map[violation] = str(acc)
+                if not content in content_to_ident_map:
+                    content_to_ident_map[content] = str(acc)
                     acc += 1
-                violation_id = violation_to_ident_map[violation]
-                test_to_violations[tst].append(violation_id)
+                content_id = content_to_ident_map[content]
+                test_to_content[tst].append(content_id)
 
-    with open(os.path.join(out_dir, "fault.info"), "w") as f:
+    with open(os.path.join(out_dir, out_file), "w") as f:
         for tst in test_to_violations:
             if tst in test_to_ident:
-                f.write(test_to_ident[tst] + ":" + " ".join(test_to_violations[tst]) + "\n")
+                f.write(test_to_ident[tst] + ":" + " ".join(test_to_content[tst]) + "\n")
 
-    with open(os.path.join(out_dir, "violations-to-ident.csv"), "w") as f:
-        f.write("violation,id\n")
-        for violation in violation_to_ident_map:
-            f.write(violation + "," + violation_to_ident_map[violation] + "\n")
+    with open(os.path.join(out_dir, mapping_file), "w") as f:
+        f.write(mode + ",id\n")
+        for content in content_to_ident_map:
+            f.write(content + "," + content_to_ident_map[content] + "\n")
 
 def convert_times_file(original_times, out_dir, test_to_ident):
     test_to_time = {}
@@ -86,8 +95,11 @@ def main(all_tests_file, original_mapping, original_violations, original_times, 
     if not os.path.isdir(out_dir):
         os.mkdir(out_dir)
     test_to_ident = build_test_to_ident_map(all_tests_file, out_dir)
-    convert_requirements_file(original_mapping, out_dir, test_to_ident)
-    convert_violations_file(original_violations, out_dir, test_to_ident)
+    # (original_file, out_dir, test_to_ident, mode):
+    convert_dimension_file(original_mapping, out_dir, test_to_ident, "req")
+    convert_dimension_file(original_violations, out_dir, test_to_ident, "violation")
+    # convert_requirements_file(original_mapping, out_dir, test_to_ident)
+    # convert_violations_file(original_violations, out_dir, test_to_ident)
     convert_times_file(original_times, out_dir, test_to_ident)
 
 if __name__ == '__main__':
