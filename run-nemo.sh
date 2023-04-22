@@ -43,11 +43,16 @@ else
 fi
 
 function backup_old_results() {
-    if [ -d ${THIS_WORKDIR} ]; then
-        echo "****Moving old results"
-        mv ${THIS_WORKDIR} ${THIS_WORKDIR}-`date +%Y-%m-%d-%H-%M-%S`
-    fi
     mkdir -p ${THIS_WORKDIR}
+    (
+	cd ${THIS_WORKDIR}
+	if [ ! -e .git ]; then
+	    echo "Initializing git repository..."
+	    git init
+	fi
+	git add .
+	git commit -m "Data archived at `date +%Y-%m-%d-%H-%M-%S`"
+    )
 }
 
 

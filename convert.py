@@ -84,6 +84,8 @@ def convert_times_file(original_times, out_dir, test_to_ident):
         for row in csv_reader:
             tst = row["test"]
             time = row["time(ns)"]
+            if "-" in time:     # ignoring negatives
+                time = time.replace("-", "")
             if tst in test_to_ident: # if this is an actual test
                 test_to_time[test_to_ident[tst]] = time
 
