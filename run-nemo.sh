@@ -50,6 +50,7 @@ function backup_old_results() {
 	    echo "Initializing git repository..."
 	    git init
 	fi
+        > stub
 	git add .
 	git commit -m "Data archived at `date +%Y-%m-%d-%H-%M-%S`"
     )
